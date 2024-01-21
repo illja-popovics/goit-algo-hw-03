@@ -20,11 +20,12 @@ def recursive_copy(src_dir, dest_dir):
 
 def copy_file_to_sorted_dir(src_file, dest_dir):
     try:
-        extension = os.path.splitext(src_file)[1][1:]  
+        extension = os.path.splitext(src_file)[1][1:]  # Get file extension without dot
         dest_subdir = os.path.join(dest_dir, extension)
 
         os.makedirs(dest_subdir, exist_ok=True)
-        shutil.copy2(src_file, dest_subdir)
+        dest_file = os.path.join(dest_subdir, os.path.basename(src_file))
+        shutil.copy2(src_file, dest_file)
 
     except Exception as e:
         print(f"Error: {e}")
