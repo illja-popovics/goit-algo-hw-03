@@ -6,13 +6,9 @@ def recursive_copy(src_dir, dest_dir):
     try:
         os.makedirs(dest_dir, exist_ok=True)
 
-        for item in os.listdir(src_dir):
-            src_path = os.path.join(src_dir, item)
-            dest_path = os.path.join(dest_dir, item)
-
-            if os.path.isdir(src_path):
-                recursive_copy(src_path, dest_path)
-            else:
+        for root, _, files in os.walk(src_dir):
+            for file in files:
+                src_path = os.path.join(root, file)
                 copy_file_to_sorted_dir(src_path, dest_dir)
 
     except Exception as e:
